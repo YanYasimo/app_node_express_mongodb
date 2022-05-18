@@ -70,6 +70,21 @@ class BookController {
             }
         })
     }
+
+    static getBookByPublishingCompany = (req, res) => {
+        const publishingCompany = req.query.publishingCompany;
+
+        books.find({ publishingCompany: publishingCompany }, {}, (err, books) => {
+            if (err) {
+                res.status(500).json({
+                    message: 'Internal server error'
+                });
+            } else {
+                res.status(200).json(books);
+            }
+        })
+    }
+
 }
 
 export default BookController;
