@@ -13,16 +13,6 @@ app.use(express.json());
 
 router(app);
 
-app.get('/', (req, res) => {
-    res.status(200).send('Hello World!');
-});
-
-app.post('/books', (req, res) => {
-    const book = req.body;
-    books.push(book);
-    res.status(201).json(book);
-});
-
 app.put('/books/:id', (req, res) => {
     let book = req.body;
     let index = findBook(req.params.id);

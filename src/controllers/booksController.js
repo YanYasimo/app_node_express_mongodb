@@ -12,6 +12,18 @@ class BookController {
             }
         });
     }
+    static createBook = (req, res) => {
+        let book = new books(req.body);
+
+        book.save((err) => {
+            if(err){
+                res.status(500).json({ message: `${err.message} - Fail on create book.` });
+            }
+            else {
+                res.status(201).json({ message: 'Book created successfully.', book });
+            }
+        })
+    }
 }
 
 export default BookController;
