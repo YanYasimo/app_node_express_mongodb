@@ -52,6 +52,19 @@ class BookController {
             }
         })
     }
+
+    static deleteBook = (req, res) => {
+        const id = req.params.id;
+
+        books.findByIdAndRemove(id, (err) => {
+            if(err){
+                res.status(500).json({ message: `${err.message} - Fail on delete book.` });
+            }
+            else {
+                res.status(200).json({ message: 'Book deleted successfully.' });
+            }
+        })
+    }
 }
 
 export default BookController;
