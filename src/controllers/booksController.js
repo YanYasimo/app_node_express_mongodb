@@ -2,7 +2,10 @@ import books from '../models/Book.js';
 
 class BookController {
     static getAllBooks = (req, res) => {
-        books.find((err, books) => {
+        books.find()
+            .populate('author')
+            .populate('publishingCompany')
+            .exec((err, books) => {
             if (err) {
                 res.status(500).json({
                     message: 'Internal server error'
@@ -16,7 +19,9 @@ class BookController {
     static getBookById = (req, res) => {
         const id = req.params.id;
 
-        books.findById(id, (err, book) => {
+        books.findById(id)
+            .populate('author', 'name')
+            .exec((err, book) => {
             if (err) {
                 res.status(400).json({
                     message: 'Book not found'
